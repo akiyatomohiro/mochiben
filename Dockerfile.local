@@ -38,7 +38,7 @@ RUN a2enmod rewrite
 
 # ソースコードと.envファイルをDockerImageに埋め込む
 COPY . $APP_HOME
-COPY .env.production /var/www/html/.env
+COPY .env.local /var/www/html/.env
 # 初回起動時に行うスクリプトファイルをコピーして実行権限を与える
 COPY ./php/start.sh /var/www/html/start.sh
 RUN chmod 744 ./php/start.sh

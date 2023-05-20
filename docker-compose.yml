@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  laravel:
+    container_name: laravel-local
+    build:
+      context: ./
+      dockerfile: Dockerfile.local
+    platform: linux/amd64
+    ports:
+      - 80:80
+    volumes:
+      - ./:/app:cached
+    tty: true
+    depends_on:
+      - db
+  db:
+    container_name: db-local
+    build:
+      context: ./mariadb-dockerfile
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: simplememo
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: simplememodbuser
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - db-volume:/var/lib/mysql:cached
+
+volumes:
+  db-volume:
