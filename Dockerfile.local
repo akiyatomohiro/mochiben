@@ -7,7 +7,7 @@ RUN apt-get update \
   && apt-get -y install libzip-dev libonig-dev \
   && docker-php-ext-install pdo_mysql mysqli zip \
   && docker-php-ext-enable pdo_mysql mysqli \
-  && a2enmod rewrite
+  && a2enmod proxy proxy_http rewrite
 
 # タイムゾーン設定
 ENV TZ=Asia/Tokyo
@@ -33,8 +33,8 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 # RUN sed -i -e "s/html/html\/public/g" /etc/apache2/sites-enabled/000-default.conf
 COPY ./php/vhost.conf /etc/apache2/conf-enabled/vhost.conf
 
-#  apache module rewrite を有効にする
-RUN a2enmod rewrite
+#  apache module proxy, proxy_http, rewrite を有効にする
+RUN a2enmod proxy proxy_http rewrite
 
 # ソースコードと.envファイルをDockerImageに埋め込む
 COPY . $APP_HOME
@@ -45,7 +45,7 @@ RUN chmod 744 ./php/start.sh
 
 # 必ずキャッシュ用のディレクトリを作っておくこと→ Fargateの場合ずっとキャッシュが残ることになる
 RUN mkdir bootstrap/sessions && \
-    mkdir storage/framework/cache/data
+  mkdir storage/framework/cache/data
 
 # フレームワークに必要なモジュールをDockerImageにインストール
 RUN composer install --no-dev --no-interaction
