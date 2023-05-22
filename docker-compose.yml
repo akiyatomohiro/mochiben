@@ -1,6 +1,21 @@
 version: "3.8"
 
 services:
+  front-local:
+    container_name: front-local
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    volumes:
+      - ./front:/app:cached
+    command: "yarn dev"
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - laravel-local
   laravel-local:
     container_name: laravel-local
     build:
