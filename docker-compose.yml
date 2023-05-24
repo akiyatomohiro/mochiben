@@ -11,7 +11,7 @@ services:
       - ./front:/app:cached
     command: "yarn dev"
     ports:
-      - 3000:3000
+      - 80:3000
     stdin_open: true
     tty: true
     depends_on:
@@ -23,7 +23,7 @@ services:
       dockerfile: Dockerfile.local
     platform: linux/amd64
     ports:
-      - 80:80
+      - 8000:80
     volumes:
       - ./:/app:cached
     tty: true
