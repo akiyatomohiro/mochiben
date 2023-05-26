@@ -5,7 +5,7 @@ services:
     container_name: front-local
     build:
       context: ./front
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.local
     platform: linux/amd64
     volumes:
       - ./front:/app:cached
