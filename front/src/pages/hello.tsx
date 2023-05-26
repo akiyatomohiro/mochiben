@@ -3,9 +3,9 @@ import useSWR from 'swr'
 import axios from '@/libs/axios'
 
 const Hello: NextPage = () => {
-    const { data, error } = useSWR('/api/hello', () =>
+    const { data, error } = useSWR('/hello', () =>
         axios
-            .get('/api/hello')
+            .get('/hello')
             .then((res: any) => res.data)
     )
 

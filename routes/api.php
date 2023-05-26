@@ -21,3 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/hello', function () {
     return 'Hello Next.js';
 });
+
+Route::get('/healthcheck', function () {
+    return response('Healthy', 200);
+});
