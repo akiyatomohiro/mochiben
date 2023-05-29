@@ -14,6 +14,8 @@ services:
     tty: true
     depends_on:
       - db-local
+    networks:
+      - mochiben-network
   db-local:
     container_name: db-local
     build:
@@ -30,6 +32,12 @@ services:
       TZ: "Asia/Tokyo"
     volumes:
       - db-local-volume:/var/lib/mysql:cached
+    networks:
+      - mochiben-network
 
 volumes:
   db-local-volume:
+
+networks:
+  mochiben-network:
+    name: mochiben-network
