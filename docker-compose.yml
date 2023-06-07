@@ -10,7 +10,7 @@ services:
     ports:
       - 8000:80
     volumes:
-      - ./:/app:cached
+      - ./:/var/www/html
     tty: true
     depends_on:
       - db-local
