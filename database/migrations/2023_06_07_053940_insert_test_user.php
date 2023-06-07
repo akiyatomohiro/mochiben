@@ -13,9 +13,9 @@ class InsertTestUser extends Migration
     public function up()
     {
         DB::table('users')->insert([
-            'name' => 'akiya',
-            'email' => 'thairwars@gmail.com',
-            'password' => bcrypt('ta19950531'),
+            'name' => 'test',
+            'email' => 'test@example.com',
+            'password' => bcrypt('password'),
         ]);
     }
 
