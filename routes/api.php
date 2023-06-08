@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MemoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::get('/hello', function () {
 Route::get('/healthcheck', function () {
     return response('Healthy', 200);
 });
+
+Route::get('/memos', [MemoController::class, 'fetch']);
