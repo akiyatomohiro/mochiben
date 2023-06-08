@@ -9,6 +9,9 @@ RUN apt-get update \
   && docker-php-ext-enable pdo_mysql mysqli \
   && a2enmod proxy proxy_http rewrite
 
+# vimをインストール
+RUN apt-get install -y vim
+
 # タイムゾーン設定
 ENV TZ=Asia/Tokyo
 
@@ -38,9 +41,9 @@ RUN a2enmod proxy proxy_http rewrite
 
 # ソースコードと.envファイルをDockerImageに埋め込む
 COPY . $APP_HOME
-COPY .env.local /var/www/html/.env
+# COPY .env.local /var/www/html/.env
 # 初回起動時に行うスクリプトファイルをコピーして実行権限を与える
-COPY ./php/start.sh /var/www/html/start.sh
+COPY ./php/start.sh /var/www/html/php/start.sh
 RUN chmod 744 ./php/start.sh
 
 # 必ずキャッシュ用のディレクトリを作っておくこと→ Fargateの場合ずっとキャッシュが残ることになる
@@ -55,4 +58,4 @@ RUN chown -R www-data:www-data $APP_HOME
 # RUN chmod -R 777 storage && \
 #     chmod -R 777 bootstrap
 # CMD php artisan migrate --force
-CMD ["bash", "start.sh"]
+CMD ["bash", "/var/www/html/php/start.sh"]
