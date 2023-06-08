@@ -26,6 +26,6 @@ class InsertTestUser extends Migration
      */
     public function down()
     {
-        //
+        DB::table('users')->where('email', 'test@example.com')->delete();
     }
 }
