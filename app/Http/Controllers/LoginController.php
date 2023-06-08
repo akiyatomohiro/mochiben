@@ -20,7 +20,6 @@ class LoginController extends Controller
     {
         // ログイン成功時
         if (Auth::attempt($request->all())) {
-            \Illuminate\Support\Facades\Log::info($request);
             $request->session()->regenerate();
             return new UserResource(Auth::user());
         }

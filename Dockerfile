@@ -9,6 +9,9 @@ RUN apt-get update \
   && docker-php-ext-enable pdo_mysql mysqli \
   && a2enmod proxy proxy_http rewrite
 
+# vimをインストール
+RUN apt-get install -y vim
+
 # タイムゾーン設定
 ENV TZ=Asia/Tokyo
 
