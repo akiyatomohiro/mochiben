@@ -23,3 +23,5 @@ Route::get('/healthcheck', function () {
 });
 
 Route::get('/memos', [MemoController::class, 'fetch']);
+
+Route::post('/memos', [MemoController::class, 'create']);
